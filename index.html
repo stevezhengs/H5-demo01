@@ -8,7 +8,7 @@
 	<!-- Link Swiper's CSS -->
 	<link rel="stylesheet" href="css/swiper.css">
 	<link href="./css/video-js.min.css" rel="stylesheet">
-    <script src="./js/video.min.js"></script>
+	<script src="./js/video.min.js"></script>
 	<!-- Demo styles -->
 	<style>
 		html,
@@ -112,7 +112,7 @@
 
 			-webkit-transition: .3s;
 			transition: .3s;
-			
+
 		}
 
 		.menu-button:hover .bar:nth-of-type(1) {
@@ -185,15 +185,16 @@
 		.swiper-container li a:hover {
 			color: #000;
 		}
-		.my-player-dimensions
-		{
+
+		.my-player-dimensions {
 			height: 100%;
 		}
-		.video-js .vjs-big-play-button{
-			top:50%;
-			left: 50%;
-		}
 
+		.video-js .vjs-big-play-button {
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
 	</style>
 </head>
 
@@ -237,9 +238,11 @@
 								we thought it was going to be software. And we’re pretty good at making software, we showed that in the iPod… other
 								people are good at it too, like Palm, but we brought great software to the smartphone space.”</span>
 						</div>
-						<div class="swiper-slide" id="video1"><video id="my-player" class="video-js" controls preload="auto"  poster="./img/video1img.png" data-setup='{}'>
-							<source src="./img/The Shelby GT350- Mustang Practice.mp4" type="video/mp4"></source>
-						</video></div>
+						<div class="swiper-slide" id="video1">
+							<video id="my-player" class="video-js" controls preload="auto" poster="./img/video1img.png" data-setup='{}'>
+								<source src="./img/The Shelby GT350- Mustang Practice.mp4" type="video/mp4"></source>
+							</video>
+						</div>
 						<div class="swiper-slide">
 							<span style="width: 80%;">“The products suck! There’s no sex in them anymore!”</span>
 						</div>
