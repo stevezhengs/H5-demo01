@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<title>AboutMe</title>
@@ -9,10 +10,20 @@
 
 	<!-- Demo styles -->
 	<style>
-		html, body {
+		html,
+		body {
 			position: relative;
 			height: 100%;
+			padding-top: constant(safe-area-inset-top);
+			/*为导航栏+状态栏的高度 88px*/
+			padding-left: constant(safe-area-inset-left);
+			/*如果未竖屏时为0   */
+			padding-right: constant(safe-area-inset-right);
+			/*如果未竖屏时为0 */
+			padding-bottom: constant(safe-area-inset-bottom);
+			/*为底下圆弧的高度 34px  */
 		}
+
 		body {
 			background: #eee;
 			font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -21,10 +32,12 @@
 			margin: 0;
 			padding: 0;
 		}
+
 		.swiper-container {
 			width: 100%;
 			height: 100%;
 		}
+
 		.swiper-slide {
 			text-align: center;
 			font-size: 18px;
@@ -44,6 +57,7 @@
 			-webkit-align-items: center;
 			align-items: center;
 		}
+
 		.menu {
 			min-width: 100px;
 			width: 70%;
@@ -52,13 +66,15 @@
 			background-color: #c29d73;
 			color: #fff;
 		}
+
 		.content {
 			width: 100%;
 		}
 
 		.menu-button {
 			position: absolute;
-			top: 0px; left: 0px;
+			top: 0px;
+			left: 0px;
 
 			padding: 15px;
 
@@ -67,14 +83,16 @@
 			-webkit-transition: .3s;
 			transition: .3s;
 
-			z-index:20;
+			z-index: 20;
 
 			/*margin: 14px;
 			border-radius: 5px;*/
 		}
+
 		.menu-button .bar:nth-of-type(1) {
 			margin-top: 0px;
 		}
+
 		.menu-button .bar:nth-of-type(3) {
 			margin-bottom: 0px;
 		}
@@ -100,9 +118,11 @@
 			-ms-transform: translateY(1.5px) rotate(-4.5deg);
 			transform: translateY(1.5px) rotate(-4.5deg);
 		}
+
 		.menu-button:hover .bar:nth-of-type(2) {
 			opacity: .9;
 		}
+
 		.menu-button:hover .bar:nth-of-type(3) {
 			-webkit-transform: translateY(-1.5px) rotate(4.5deg);
 			-ms-transform: translateY(-1.5px) rotate(4.5deg);
@@ -114,57 +134,73 @@
 			-ms-transform: translateY(15px) rotate(-45deg);
 			transform: translateY(15px) rotate(-45deg);
 		}
+
 		.cross .bar:nth-of-type(2) {
 			opacity: 0;
 		}
+
 		.cross .bar:nth-of-type(3) {
 			-webkit-transform: translateY(-15px) rotate(45deg);
 			-ms-transform: translateY(-15px) rotate(45deg);
 			transform: translateY(-15px) rotate(45deg);
 		}
+
 		.cross:hover .bar:nth-of-type(1) {
 			-webkit-transform: translateY(13.5px) rotate(-40.5deg);
 			-ms-transform: translateY(13.5px) rotate(-40.5deg);
 			transform: translateY(13.5px) rotate(-40.5deg);
 		}
+
 		.cross:hover .bar:nth-of-type(2) {
 			opacity: .1;
 		}
+
 		.cross:hover .bar:nth-of-type(3) {
 			-webkit-transform: translateY(-13.5px) rotate(40.5deg);
 			-ms-transform: translateY(-13.5px) rotate(40.5deg);
 			transform: translateY(-13.5px) rotate(40.5deg);
 		}
+
 		.swiper-big {
-      width: 100%;
-      height: 100%;
-	  z-index:15;
-	  position:absolute;
-	  
-    }
-	.swiper-container li{
-		list-style: none;
-		text-align: center;
-		
-	}
-	.swiper-container li a{
-		text-decoration: none;
-		color: #eee;
-	}
-	.swiper-container li a:hover{
-		color: #000;
-	}
+			width: 100%;
+			height: 100%;
+			z-index: 15;
+			position: absolute;
+
+		}
+
+		.swiper-container li {
+			list-style: none;
+			text-align: center;
+
+		}
+
+		.swiper-container li a {
+			text-decoration: none;
+			color: #eee;
+		}
+
+		.swiper-container li a:hover {
+			color: #000;
+		}
 	</style>
 </head>
+
 <body>
 	<!-- Swiper -->
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide menu">
 				<ul>
-					<li><a href="#">学习</a></li>
-					<li><a href="#">设计</a></li>
-					<li><a href="#">摄影</a></li>
+					<li>
+						<a href="#">学习</a>
+					</li>
+					<li>
+						<a href="#">设计</a>
+					</li>
+					<li>
+						<a href="#">摄影</a>
+					</li>
 				</ul>
 			</div>
 			<div class="swiper-slide content">
@@ -174,21 +210,38 @@
 					<div class="bar"></div>
 				</div>
 				<div class="swiper-big">
-						<div class="swiper-wrapper">
-						  <div class="swiper-slide" style="background-color: rgb(173, 79, 79); font-size:10ex ;">A Friend of Mine</div>
-						  <div class="swiper-slide"><span style="width: 80%;">"Your time is limited, so don’t waste it living someone else’s life. Don’t be trapped by dogma – which is living with the results of other people’s thinking. Don’t let the noise of other’s opinions drown out your own inner voice. And most important, have the courage to follow your heart and intuition. They somehow already know what you truly want to become. Everything else is secondary."</span></div>
-						  <div class="swiper-slide" style=" background-image: url(./img/img1.JPG);background-repeat:no-repeat; background-size: cover;"></div>
-						  <div class="swiper-slide"><span style="width: 80%;">“Well, let me say something about Apple. We didn’t want to get into any business where we didn’t own or control the primary tech, because if you don’t the people who do own it will beat you. Our big insight about 8 years ago was that it was going to shift from big displays or optical pickup heads, or radios being the most important component, we thought it was going to be software. And we’re pretty good at making software, we showed that in the iPod… other people are good at it too, like Palm, but we brought great software to the smartphone space.”</span></div>
-						  <div class="swiper-slide" style=" background-image: url(./img/img2.JPG);background-repeat:no-repeat; background-size:cover;"></div>
-						  <div class="swiper-slide"><span style="width: 80%;">“The products suck! There’s no sex in them anymore!”</span></div>
-						  <div class="swiper-slide" style=" background-image: url(./img/img3.JPG);background-repeat:no-repeat; background-size:cover;"></div>
-						  <div class="swiper-slide"><span style="width: 80%;">“Nobody has tried to swallow us since I’ve been here. I think they are afraid how we would taste.”</span></div>
-						  <div class="swiper-slide" style=" background-image: url(./img/img8.JPG);background-repeat:no-repeat; background-size:cover;"></div>
-						  <div class="swiper-slide"><span style="width: 80%;">Design by 16240446</span></div>
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" style="background-color: rgb(173, 79, 79); font-size:10ex ;">A Friend of Mine</div>
+						<div class="swiper-slide">
+							<span style="width: 80%;">"Your time is limited, so don’t waste it living someone else’s life. Don’t be trapped by dogma – which is living with
+								the results of other people’s thinking. Don’t let the noise of other’s opinions drown out your own inner voice. And
+								most important, have the courage to follow your heart and intuition. They somehow already know what you truly want
+								to become. Everything else is secondary."</span>
 						</div>
-						<!-- Add Pagination -->
-						<div class="swiper-pagination"></div>
-					  </div>
+						<div class="swiper-slide" style=" background-image: url(./img/img1.JPG);background-repeat:no-repeat; background-size: cover;"></div>
+						<div class="swiper-slide">
+							<span style="width: 80%;">“Well, let me say something about Apple. We didn’t want to get into any business where we didn’t own or control the
+								primary tech, because if you don’t the people who do own it will beat you. Our big insight about 8 years ago was
+								that it was going to shift from big displays or optical pickup heads, or radios being the most important component,
+								we thought it was going to be software. And we’re pretty good at making software, we showed that in the iPod… other
+								people are good at it too, like Palm, but we brought great software to the smartphone space.”</span>
+						</div>
+						<div class="swiper-slide" style=" background-image: url(./img/img2.JPG);background-repeat:no-repeat; background-size:cover;"></div>
+						<div class="swiper-slide">
+							<span style="width: 80%;">“The products suck! There’s no sex in them anymore!”</span>
+						</div>
+						<div class="swiper-slide" style=" background-image: url(./img/img3.JPG);background-repeat:no-repeat; background-size:cover;"></div>
+						<div class="swiper-slide">
+							<span style="width: 80%;">“Nobody has tried to swallow us since I’ve been here. I think they are afraid how we would taste.”</span>
+						</div>
+						<div class="swiper-slide" style=" background-image: url(./img/img8.JPG);background-repeat:no-repeat; background-size:cover;"></div>
+						<div class="swiper-slide">
+							<span style="width: 80%;">Design by 16240446</span>
+						</div>
+					</div>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -198,43 +251,44 @@
 
 	<!-- Initialize Swiper -->
 	<script>
-    var menuButton = document.querySelector('.menu-button');
-    var swiper = new Swiper('.swiper-container', {
-      slidesPerView: 'auto',
-      initialSlide: 1,
-      resistanceRatio: 0,
-      slideToClickedSlide: true,
-      on: {
-        init: function () {
-          var slider = this;
-          menuButton.addEventListener('click', function () {
-            if (slider.activeIndex === 0) {
-              slider.slideNext();
-            } else {
-              slider.slidePrev();
-            }
-          }, true);
-        },
-        slideChange: function () {
-          var slider = this;
-          if (slider.activeIndex === 0) {
-            menuButton.classList.add('cross');
-          } else {
-            menuButton.classList.remove('cross');
-          }
-        },
-      }
-    });
-	var swiper = new Swiper('.swiper-big', {
-        direction: 'vertical',
-        slidesPerView: 1,
-        spaceBetween: 30,
-        mousewheel: true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-    });
+		var menuButton = document.querySelector('.menu-button');
+		var swiper = new Swiper('.swiper-container', {
+			slidesPerView: 'auto',
+			initialSlide: 1,
+			resistanceRatio: 0,
+			slideToClickedSlide: true,
+			on: {
+				init: function () {
+					var slider = this;
+					menuButton.addEventListener('click', function () {
+						if (slider.activeIndex === 0) {
+							slider.slideNext();
+						} else {
+							slider.slidePrev();
+						}
+					}, true);
+				},
+				slideChange: function () {
+					var slider = this;
+					if (slider.activeIndex === 0) {
+						menuButton.classList.add('cross');
+					} else {
+						menuButton.classList.remove('cross');
+					}
+				},
+			}
+		});
+		var swiper = new Swiper('.swiper-big', {
+			direction: 'vertical',
+			slidesPerView: 1,
+			spaceBetween: 30,
+			mousewheel: true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+			},
+		});
 	</script>
 </body>
+
 </html>
