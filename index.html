@@ -64,8 +64,8 @@
 			width: 70%;
 			max-width: 320px;
 
-			background-color: #c29d73;
-			color: #fff;
+			background-color: #eeecda;
+			color: #000;
 		}
 
 		.content {
@@ -174,16 +174,20 @@
 		.swiper-container li {
 			list-style: none;
 			text-align: center;
+			margin-left: -30px;
+			line-height: 50px;
+			font-size: 30px;
 
 		}
 
 		.swiper-container li a {
 			text-decoration: none;
-			color: #eee;
+			color: #000;
 		}
 
 		.swiper-container li a:hover {
-			color: #000;
+			text-decoration: underline;
+
 		}
 
 		.my-player-dimensions {
@@ -299,11 +303,19 @@
 			slidesPerView: 1,
 			spaceBetween: 30,
 			mousewheel: true,
+			slidesPerView :1,
+			freeMode : true,
+			freeModeMomentum : false,
+			freeModeSticky : true,
+
 			pagination: {
 				el: '.swiper-pagination',
+			
 				clickable: true,
-			},
+			}, 
+
 		});
+
 	</script>
 </body>
 
