@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>微信使用了哪些第三方库</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/wenzhang.css" />
+    <style type="text/css">
+        
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <article itemscope="itemscope" class="article">
+            <div class="wz1png"><img src="./img/wz1.png" /></div>
+            <h1 class="article-title">微信使用了哪些第三方库</h1>
+            <div itemprop="articleBody" class="article-content">
+                <p>如今，APP 越来越多，公司之间面临着同一个问题，竞品越来越多，公司之间为获取更多流量不得不在APP的体验上做足功课。那么，研究竞品变得越来越重要，比如研究竞品某个核心功能使用了哪些第三方服务、架构是什么样的、某个接口是如何设计的、数据库是如何设计的、沙盒目录结构是什么样的等。最近研究第三方
+                    APP 比较多，希望可以总结一套研究第三方 APP 的流程，目前正在研究微信，如果有机会分享给读者朋友们。</p>
+                <p>研究某个竞品APP时，需要了解其使用的第三方库，使用 class-dump 导出的头文件非常多，仅靠肉眼查看时，耗时耗力。为了解决这个痛点，便发明了这个工具。下面是获取微信 使用的第三方库，可以查看 pod 库的
+                    star 数，源地址。
+                </p>
+                <ul>
+                    <li>
+                        <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Ffacebook%2Fpop.git" rel="nofollow noopener noreferrer">pop</a> - (18872)</li>
+                    <li>
+                        <a target="_blank" href="https://github.com/BradLarson/GPUImage" rel="nofollow noopener noreferrer">GPUImage</a> - (17338)</li>
+                    <li>
+                        <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fmarcuswestin%2FWebViewJavascriptBridge.git"
+                            rel="nofollow noopener noreferrer">WebViewJavascriptBridge</a> - (10649)</li>
+                    <li>
+                        <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Ffacebook%2Ffacebook-ios-sdk.git" rel="nofollow noopener noreferrer">FBSDKCoreKit</a> - (5894)</li>
+                    <li>
+                        <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2FTencent%2Fwcdb" rel="nofollow noopener noreferrer">WCDB</a> - (5700)</li>
+                    <li>
+                        <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fswisspol%2FGCDWebServer.git" rel="nofollow noopener noreferrer">GCDWebServer</a> - (4011)</li>
+                    <li>
+                        <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fenormego%2FEGOTableViewPullRefresh.git"
+                            rel="nofollow noopener noreferrer">EGOTableViewPullRefresh</a> - (3336)</li>
+                    <li>
+                        <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fkstenerud%2FKSCrash.git" rel="nofollow noopener noreferrer">KSCrash</a> - (1942)</li>
+                    <li>
+                        <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fylechelle%2FOpenUDID.git" rel="nofollow noopener noreferrer">OpenUDID</a> - (1909)</li>
+                    <li>
+                        <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fibireme%2FYYImage.git" rel="nofollow noopener noreferrer">YYImage</a> - (1193)</li>
+                    <li>
+                        <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fkhanlou%2FSKBounceAnimation.git" rel="nofollow noopener noreferrer">SKBounceAnimation</a> - (912)</li>
+                    <li>
+                        <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fibireme%2FYYAsyncLayer.git" rel="nofollow noopener noreferrer">YYAsyncLayer</a> - (405)</li>
+                </ul>
+                <h2 class="heading" data-id="heading-0">原理</h2>
+                <p>在介绍原理前，需要了解 class-dump，它可以根据某个被砸坑的应用，导出APP中所有的头文件，包含
+                    <strong>第三方库的头文件</strong>，那么可以利用导出的第三库头文件反查第三方库。iOS 的同学都清楚，目前主流的第三方库都使用 Pod 管理，所有的第三方开源库都被放到
+                    <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2FCocoaPods%2FSpecs" rel="nofollow noopener noreferrer">CocoaPods/Specs</a> 中。而这些源文件都可以通过 Github 提供的 API 获取到它的源文件。对比 class-dump 导出的头文件和通过 Github 提供的 API 获取到它的源文件即可确定它使用的第三方库。</p>
+                <p>以 AFNetworking 为例：</p>
+                <p>使用 class-dump 导出的头文件(部分)：</p>
+                <pre><code class="hljs bash" lang="bash">AFHTTPRequestSerializer.h
+AFHTTPResponseSerializer.h
+AFHTTPSessionManager.h
+</code></pre>
+                <p>使用 Github 提供的
+                    <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fapi.github.com%2Frepos%2FAFNetworking%2FAFNetworking%2Fcontents%2FAFNetworking"
+                        rel="nofollow noopener noreferrer">API</a> (部分) 获取源文件</p>
+                <pre><code class="hljs bash" lang="bash">  [{
+<span class="hljs-string">"name"</span>: <span class="hljs-string">"AFURLResponseSerialization.h"</span>,
+<span class="hljs-string">"path"</span>: <span class="hljs-string">"AFNetworking/AFURLResponseSerialization.h"</span>
+},
+{
+<span class="hljs-string">"name"</span>: <span class="hljs-string">"AFURLResponseSerialization.m"</span>,
+<span class="hljs-string">"path"</span>: <span class="hljs-string">"AFNetworking/AFURLResponseSerialization.m"</span>
+},
+{
+<span class="hljs-string">"name"</span>: <span class="hljs-string">"AFURLSessionManager.h"</span>,
+<span class="hljs-string">"path"</span>: <span class="hljs-string">"AFNetworking/AFURLSessionManager.h"</span>
+}]
+</code></pre>
+                <p>对比 class-dump 导出的头文件 和 使用 Github 提供的 API 获取的头文件，可以推出使用的第三方库为
+                    <code>AFNetworking</code>。</p>
+                <p>但是这样有个问题，遍历 class-dump 导出的头文件，需要每个头文件都需要请求Github提供的API，这样速度非常慢，是无法忍受的。为解决这个问题，需要提前把
+                    <code>CocoaPods</code> 中第三方库的源文件名缓存到数据库中，这样就不需要每次从网络中获取pod库的源文件。</p>
+                <pre><code class="hljs bash" lang="bash">CREATE TABLE podlib (
+name        TEXT PRIMARY KEY
+               NOT NULL,
+<span class="hljs-built_in">source</span>      TEXT,
+summary     TEXT,
+star        INT,
+file1       TEXT,
+file2       TEXT,
+file3       TEXT,
+source_file TEXT
+);
+</code></pre>
+                <h2 class="heading" data-id="heading-1">使用</h2>
+                <p>本工具基于 python 写的，在
+                    <a target="_blank" href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Flefex%2FWeChatShot" rel="nofollow noopener noreferrer">
+                        <strong>这里</strong>
+                    </a> 可以找到源码。下载源码后修改
+                    <code>main.py</code> 文件的
+                    <code>IPA_HEADER_PATH</code> 为 class-dump 导出的头文件目录。执行
+                    <code>python main.py</code>
+                </p>
+                <pre><code class="hljs bash" lang="bash">IPA_HEADER_PATH = <span class="hljs-string">'/Users/lefex/Desktop/header/xxx'</span>
+</code></pre>
+                <h2 class="heading" data-id="heading-2">总结</h2>
+                <ul>
+                    <li>由于本工具是基于导出的头文件查找第三方库，而有些库如果不支持 pod，那么就不能查找到该三方库（如果连 Pod 都不支持，你还会用吗？）；</li>
+                    <li>如果项目中的文件名恰好和第三方库中的文件名相同，会被判定为第三方库，所以添加了 star 数作为参考（如果 star 数小于 100，你会用吗？）；</li>
+                    <li>由于
+                        <code>xxx.podspec.json</code> 文件中的
+                        <code>source_files</code> 有时候没有，导致生成 Github API 时获取不到源文件，导致有些pod库查不出来，这块需要后续逐步完善数据库；</li>
+                    <li>查找出来的第三方库，会以 star 倒序排列，更容易识别是否为第三方库。</li>
+                </ul>
+
+            </div>
+        </article>
+    </div>
+</body>
+
+</html>
