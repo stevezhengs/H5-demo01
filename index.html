@@ -317,6 +317,26 @@
 			}, 
 
 		});
+		let scrollEle = document.body;
+scrollEle.addEventListener('touchstart', (evt) => {
+    // 修复微信的黑色弹性滚动与ios冲突问题
+    let scrollTop = scrollEle.scrollTop;
+    let scrollHeight = scrollEle.scrollHeight;
+    let height = scrollEle.offsetHeight;
+    let scrollTopTo;
+
+    // 顶部
+    scrollTopTo = Math.max(scrollTop, 1);
+
+    // 底部
+    if(scrollTopTo === scrollHeight - height) {
+      scrollTopTo--;
+    }
+
+    if(scrollTop != scrollTopTo) {
+      scrollEle.scrollTop = scrollTopTo;
+    }
+});
 
 	</script>
 </body>
