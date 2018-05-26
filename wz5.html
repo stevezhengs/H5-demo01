@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>深入理解闭包之前置知识→作用域与词法作用域</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/wz5.css" />
+    <style type="text/css">
+    .top {
+    font-family: -apple-system, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Arial, sans-serif;
+    text-rendering: optimizeLegibility;
+    width: 80%;
+    margin: 30px auto;
+    color: #333;
+    font-size: 15px;
+}
+.article-content img {
+    background-repeat: no-repeat;
+    height: auto;
+    width: 70%;
+}
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <article data-v-13f76525="" itemscope="itemscope" itemtype="http://schema.org/Article" class="article" data-v-3f216172="">
+            <!---->
+            <h1 data-v-13f76525="" class="article-title">深入理解闭包之前置知识→作用域与词法作用域</h1>
+            <div data-v-13f76525="" itemprop="articleBody" class="article-content">
+                <h1 class="heading" data-id="heading-0">前言</h1>
+                <p>这两天刚好和朋友讨论到闭包，这个JavaScript中的“神兽”，很多同学会觉得闭包这玩意太闹心了，怎么着都理解不了...其实刚接触JavaScript的时候我也是这样的。</p>
+                <p>但是呢，闭包却非常重要！非常重要！非常重要！ 在《你不知道的JavaScript》中甚至这样写道“
+                    <strong>对于那些有一点 JavaScript 使用经验但从未真正理解闭包概念的人来说，理解闭包可以看作是某种意义上的重生</strong>”。</p>
+                <p>所以看到这里，各位亲是不是迫切的想要深入的去了解一下闭包了呢？ 不急，不急，对于真正的理解闭包有一个非常重要的前置知识，那就是
+                    <strong>作用域与词法作用域</strong>，如果你没能好好理解词法作用域，那么闭包是肯定理解不了的！那么接下来就好好的理解一下词法作用域吧。</p>
+                <h1 class="heading" data-id="heading-1">作用域</h1>
+                <p>我们先抛出一个概念：“
+                    <strong>词法作用域是作用域的一种工作模型</strong>”，先不管这句话的深层次的意思，就但看表面，我们就应该可以得出一个结论，那就是没有作用域的概念就没有词法作用域的概念。所以...接下来，你懂的...</p>
+                <h2 class="heading" data-id="heading-2">什么是作用域</h2>
+                <p>一言以蔽之，“
+                    <strong>作用域就是一套规则，用于确定在何处以及如何查找变量（标识符）的规则</strong>”。在这句话中读到一个关键点
+                    <em>查找变量（标识符）</em>，那么就从查找变量说起吧。</p>
+                <p>先看一段及其简单的代码</p>
+                <pre><code class="hljs javascript" lang="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-keyword">var</span> a = <span class="hljs-string">'iceman'</span>;
+<span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// 输出"iceman"</span>
+}
+foo();
+</code></pre>
+                <p>在foo函数执行的时候，输出一个a变量，那么这个a变量是哪里来的嘞，有看到函数第一行有定义a变量的代码
+                    <code>var a = 'iceman'</code>。</p>
+                <p>再看一段同样简单的代码</p>
+                <pre><code class="hljs javascript" lang="javascript"><span class="hljs-keyword">var</span> b = <span class="hljs-string">'programmer'</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-built_in">console</span>.log(b); <span class="hljs-comment">// 输出"programmer"</span>
+}
+foo();
+</code></pre>
+                <p>同样的道理，在输出b的时候，自己函数内部没有找到变量b，那么就在外层的全局中查找，找到了就停止查找并输出了。</p>
+                <p>注意以上两段代码都有查找变量，第一段代码是在
+                    <strong>函数</strong>中找到a变量，第二段代码是在
+                    <strong>全局</strong>中找到b变量。现在闭上眼睛，我要给加粗的这两个词的后面加上几个字了！</p>
+                <p>好了，打开眼睛，Duang，Duang ---&gt;
+                    <strong>函数作用域</strong>、
+                    <strong>全局作用域</strong>，把这两个词换入到原来那句话中，第一段代码是在
+                    <strong>函数作用域</strong>中找到a变量，第二段代码是在
+                    <strong>全局作用域</strong>中找到b变量。</p>
+                <p>所以，懂了没有呢？通俗的讲，
+                    <strong>作用域就是查找变量的地方</strong>。在某函数中找到该变量，就可以说在该函数作用域中找到了该变量；在全局中找到该变量，就可以说在全局作用域中找到了该变量！</p>
+                <p>不知道各位同学有没注意到一个细节，我们在查找b变量的时候，先在函数作用域中查找，没有找到，再去全局作用域中查找，有一个往外层查找的过程。我们好像是顺着一条链条从下往上查找变量，这条链条，我们就称之为
+                    <strong>作用域链</strong>。</p>
+                <h2 class="heading" data-id="heading-3">作用域嵌套</h2>
+                <p>在还没有接触到ES6的let、const之前，只有函数作用域和全局作用域，函数作用域肯定是在全局作用域里面的，而函数作用域中又可以继续嵌套函数作用域，如图：</p>
+                <p></p>
+                <figure>
+                    <img alt="作用域嵌套.png" class="lazyload inited loaded"
+                        data-width="592" data-height="638" src="./img/wz5-1.jpg">
+                    <figcaption></figcaption>
+                </figure>
+                <p></p>
+                <p>用代码表示：</p>
+                <p></p>
+                <figure>
+                    <img alt="作用域嵌套.png" class="lazyload inited loaded"
+                        data-width="890" data-height="456" src="./img/wz5-2.jpg">
+                    <figcaption></figcaption>
+                </figure>
+                <p></p>
+                <p>以上两张图可以很直观的看出作用域的嵌套关系了吧。查找变量也是顺着红色的箭头走的，从里到外，这从里到外的各层作用域就组成了作用域链。</p>
+                <h2 class="heading" data-id="heading-4">作用域中变量（标识符）的查找规则</h2>
+                <p>首先声明一点，JavaScript是有编译过程的，不要惊讶，真的有！也就是说
+                    <code>var name = 'iceman'</code>这段代码，其实这是有两个动作的：</p>
+                <ul>
+                    <li>
+                        <p>编译器在当前作用域中声明一个变量name</p>
+                    </li>
+                    <li>
+                        <p>运行时引擎在作用域中查找该变量，找到了name变量并为其赋值</p>
+                    </li>
+                </ul>
+                <p>证明以上的说法：</p>
+                <pre><code class="hljs javascript" lang="javascript"><span class="hljs-built_in">console</span>.log(name); <span class="hljs-comment">// 输出undefined</span>
+<span class="hljs-keyword">var</span> name = <span class="hljs-string">'iceman'</span>; 
+</code></pre>
+                <p>在
+                    <code>var name = 'iceman'</code>的上一行输出name变量，并没有报错，输出undefined，说明输出的时候该变量已经存在了，只是没有赋值而已。</p>
+                <p>其实编译器是这样工作的，在代码执行之前从上到下的进行编译，当遇到某个用var声明的变量的时候，先检查在当前作用域下是否存在了该变量。如果存在，则忽略这个声明；如果不存在，则在当前作用域中声明该变量。</p>
+                <p>上面的这段简单的代码包含两种查找类型：输出变量的值的时候的查找类型是RHS，找到变量为其赋值的查找类型是LHS。</p>
+                <p>我猜各位同学一定可以猜到“L”和“R”的含义，这里的左侧和右侧指的是在赋值操作的左侧和右侧。也就是说，变量出现在赋值操作的左侧时进行LHS查询，出现在右侧时进行RHS查询。</p>
+                <p>用一句通俗的话来讲，RHS就是取到它的源值。</p>
+                <p>
+                    <strong>注意</strong>：“赋值操作的左侧和右侧”，并不意味着只是“=”，实际上赋值操作还有好几种形式。</p>
+                <p>在作用域中查找变量都是RHS，并且查找的规则是从当前作用域开始找，如果没找到再到父级作用域中找，一层层往外找，如果在全局作用域如果还没找到的话，就会报错了：
+                    <strong>ReferenceError: 某变量 is not defined</strong>
+                </p>
+                <p>所有的赋值操作中查找变量都是LHS。其中
+                    <code>a=4</code>这类赋值操作，也是会从当前作用域中查找，如果没有找到再到外层作用域中找，如果到全局变量啊这个变量，在非严格模式下会创建一个全局变量a。不过，非常不建议这么做，因为轻则污染全局变量，重则造成内存泄漏（比如：a
+                    = 一个非常大的数组，a在全局变量中，一直用有引用，程序不会自动将其销毁）。</p>
+                <h1 class="heading" data-id="heading-5">词法作用域</h1>
+                <p>在上面的作用域介绍中，我们将作用域定义为一套规则，这套规则来管理浏览器引擎如何在当前作用域以及嵌套的作用域中根据变量（标识符）进行变量查找。</p>
+                <p>我们在前面有抛出一个概念：“词法作用域是作用域的一种工作模型”，作用域有两种工作模型，在JavaScript中的词法作用域是比较主流的一种，另一种动态作用域（比较少的语言在用）。</p>
+                <p>所谓的词法作用域就是
+                    <strong>在你写代码时将变量和块作用域写在哪里来决定，也就是词法作用域是静态的作用域，在你书写代码时就确定了</strong>。</p>
+                <p>请看以下代码：</p>
+                <pre><code class="hljs javascript" lang="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn1</span>(<span class="hljs-params">x</span>) </span>{
+<span class="hljs-keyword">var</span> y = x + <span class="hljs-number">4</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn2</span>(<span class="hljs-params">z</span>) </span>{
+<span class="hljs-built_in">console</span>.log(x, y, z);
+}
+fn2(y * <span class="hljs-number">5</span>);
+}
+fn1(<span class="hljs-number">6</span>); <span class="hljs-comment">// 6 10 50</span>
+</code></pre>
+                <p>这个例子中有个三个嵌套的作用域，如图：</p>
+                <p></p>
+                <figure>
+                    <img alt="image.png" class="lazyload inited loaded"
+                        data-width="1120" data-height="402" src="./img/wz5-3.jpg">
+                    <figcaption></figcaption>
+                </figure>
+                <p></p>
+                <ul>
+                    <li>
+                        <p>A 为全局作用域，有一个标识符：fn1</p>
+                    </li>
+                    <li>
+                        <p>B 为fn1所创建的作用域，有三个标识符：x、y、fn2</p>
+                    </li>
+                    <li>
+                        <p>C为fn2所创建的作用域，有一个标识符：z</p>
+                    </li>
+                </ul>
+                <p>作用域是由期代码写在哪里决定的，并且是逐级包含的。</p>
+                <p>在此强调，词法作用域就是作用域是由书写代码时函数声明的位置来决定的。编译阶段就能够知道全部标识符在哪里以及是如何声明的，所以词法作用域是静态的作用域，也就是词法作用域能够预测在执行代码的过程中如何查找标识符。</p>
+                <p>
+                    <strong>注1</strong>：eval()和with可以通过其特殊性用来“欺骗”词法作用域，不过正常情况下都不建议使用，会产生性能问题。</p>
+                <p>
+                    <strong>注2</strong>：ES6中有了let、const就有了块级作用域，后面会专门介绍。</p>
+
+                <p></p>
+                <p>作者：icemanFE</p>
+            </div>
+        </article>
+    </div>
+</body>
+
+</html>
