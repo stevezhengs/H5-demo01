@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
     <title>Steve's Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
@@ -20,9 +20,7 @@
             float: left;
             box-shadow: 0 15px 15px 0 rgba(15, 37, 64, 0.1);
             background-color: #ffffff;
-
             position: relative;
-
         }
 
         .biaoti:hover {
@@ -80,45 +78,67 @@
 
         #wz4 {
             height: 400px;
-            background-color:#F0F0F0;
+            background-color: #F0F0F0;
         }
+
         #wz5 {
             background: url("./img/wz5-1.jpg");
             background-repeat: no-repeat;
             background-size: cover;
             background-position-x: center;
         }
-        
+
+        #wz6 {
+            background: url("./img/wz6-1.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position-x: center;
+        }
+        @media (min-width:800px) {
+            .jzdq {
+            width: 80%;
+            margin: 0px auto;
+            text-align: center;
+
+        }
+
+}
+
     </style>
 </head>
 
 <body>
 
-
-    <div class="thesec" id="wz1">
-        <div class="biaoti" onclick="window.location.href='wz1.html';">
-            <p>微信使用了哪些第三方库</p>
+    <div class="jzdq">
+        <div class="thesec" id="wz1">
+            <div class="biaoti" onclick="window.location.href='wz1.html';">
+                <p>微信使用了哪些第三方库</p>
+            </div>
+        </div>
+        <div class="thesec" id="wz2">
+            <div class="biaoti" onclick="window.location.href='wz2.html';">
+                <p>iOS应如何省电</p>
+            </div>
+        </div>
+        <div class="thesec" id="wz3">
+            <div class="biaoti" onclick="window.location.href='wz3.html';">
+                <p>Sketch中嵌套Symbol的使用</p>
+            </div>
+        </div>
+        <div class="thesec" id="wz4">
+            <div class="biaoti cwz">要想初步保护好自己的隐私，要用开源的Linux系统，tor浏览器，手动校验安装包md5。再自己搭建3级以上的中转代理，买服务器时记得用比特币，用户名要用protonmail、Anonymousspeech等加密邮箱。然后自己写全局代理程序，dns解析也要代理。不用AES等大众加密算法，自己写加密算法，防止被深度学习分析出包特征,haha</div>
+        </div>
+        <div class="thesec" id="wz5">
+            <div class="biaoti" onclick="window.location.href='wz5.html';">
+                <p>作用域与词法作用域</p>
+            </div>
+        </div>
+        <div class="thesec" id="wz6">
+            <div class="biaoti" onclick="window.location.href='wz6.html';">
+                <p>作用域与词法作用域</p>
+            </div>
         </div>
     </div>
-    <div class="thesec" id="wz2">
-        <div class="biaoti" onclick="window.location.href='wz2.html';">
-            <p>iOS应如何省电</p>
-        </div>
-    </div>
-    <div class="thesec" id="wz3">
-        <div class="biaoti"onclick="window.location.href='wz3.html';">
-            <p>Sketch中嵌套Symbol的使用</p>
-        </div>
-    </div>
-    <div class="thesec" id="wz4">
-        <div class="biaoti cwz">要想初步保护好自己的隐私，要用开源的Linux系统，tor浏览器，手动校验安装包md5。再自己搭建3级以上的中转代理，买服务器时记得用比特币，用户名要用protonmail、Anonymousspeech等加密邮箱。然后自己写全局代理程序，dns解析也要代理。不用AES等大众加密算法，自己写加密算法，防止被深度学习分析出包特征,haha</div>
-    </div>
-    <div class="thesec" id="wz5">
-        <div class="biaoti"onclick="window.location.href='wz5.html';">
-            <p>作用域与词法作用域</p>
-        </div>
-    </div>
-
 </body>
 
 </html>

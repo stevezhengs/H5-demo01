@@ -218,7 +218,7 @@ textarea {
 .article-content iframe,
 .article-content img:not(.equation),
 .article-content video {
-  max-width: 100%;
+  max-width: 70%;
   margin: 0;
 }
 .article-content img.lazyload {
@@ -23019,4 +23019,15 @@ em[data-v-a9075514] {
   .tip[data-v-5ce25e66] {
     display: none;
   }
+}
+.top{
+  font-family: -apple-system, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  width: 80%;
+  margin: 30px auto;
+  color: #333;
+  font-size: 15px;
+}
+.top img{
+  width:70%;
 }
