@@ -11,6 +11,7 @@
 	<script src="./js/video.min.js"></script>
 	<link rel="shortcut icon" href="img/weblogo.png">
 	<link rel="apple-touch-icon" href="img/weblogo.png">
+	<script>window.PointerEvent = undefined</script>
 	<!-- Demo styles -->
 	<style>
 		html,
@@ -304,7 +305,7 @@
 			spaceBetween: 30,
 			mousewheel: true,
 			slidesPerView :1,
-			speed:800,
+			speed:500,
 /* 			freeMode : true,
 			freeModeMomentum : false,
 			freeModeSticky : true, */
@@ -317,26 +318,6 @@
 			}, 
 
 		});
-		let scrollEle = document.body;
-scrollEle.addEventListener('touchstart', (evt) => {
-    // 修复微信的黑色弹性滚动与ios冲突问题
-    let scrollTop = scrollEle.scrollTop;
-    let scrollHeight = scrollEle.scrollHeight;
-    let height = scrollEle.offsetHeight;
-    let scrollTopTo;
-
-    // 顶部
-    scrollTopTo = Math.max(scrollTop, 1);
-
-    // 底部
-    if(scrollTopTo === scrollHeight - height) {
-      scrollTopTo--;
-    }
-
-    if(scrollTop != scrollTopTo) {
-      scrollEle.scrollTop = scrollTopTo;
-    }
-});
 
 	</script>
 </body>
